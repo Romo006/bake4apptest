@@ -20,7 +20,7 @@ const CFIP = process.env.CFIP || 'skk.moe';
 const CFPORT = process.env.CFPORT || 443;
 const NAME = process.env.NAME || 'Vls';
 const ARGO_PORT = process.env.ARGO_PORT || 18080;
-const PORT = process.env.SERVER_PORT || process.env.PORT || 25000;
+const PORT = process.env.SERVER_PORT || process.env.PORT || 23000;
 
 
 if (!fs.existsSync(FILE_PATH)) {
@@ -55,11 +55,11 @@ app.get("/", function(req, res) {
 const config = {
   log: { access: '/dev/null', error: '/dev/null', loglevel: 'none' },
   inbounds: [
-    { port: ARGO_PORT, protocol: 'vless', settings: { clients: [{ id: UUID, flow: 'xtls-rprx-vision' }], decryption: 'none', fallbacks: [{ dest: 25001 }, { path: "/vless2024", dest: 25002 }, { path: "/vmess2024", dest: 25003 }, { path: "/trojan2024", dest: 25004 }] }, streamSettings: { network: 'tcp' } },
-    { port: 25001, listen: "127.0.0.1", protocol: "vless", settings: { clients: [{ id: UUID }], decryption: "none" }, streamSettings: { network: "ws", security: "none" } },
-    { port: 25002, listen: "127.0.0.1", protocol: "vless", settings: { clients: [{ id: UUID, level: 0 }], decryption: "none" }, streamSettings: { network: "ws", security: "none", wsSettings: { path: "/vless2024" } }, sniffing: { disable: false, destOverride: ["http", "tls", "quic"], metadataOnly: false } },
-    { port: 25003, listen: "127.0.0.1", protocol: "vmess", settings: { clients: [{ id: UUID, alterId: 0 }] }, streamSettings: { network: "ws", wsSettings: { path: "/vmess2024" } }, sniffing: { disable: false, destOverride: ["http", "tls", "quic"], metadataOnly: false } },
-    { port: 25004, listen: "127.0.0.1", protocol: "trojan", settings: { clients: [{ password: UUID }] }, streamSettings: { network: "ws", security: "none", wsSettings: { path: "/trojan2024" } }, sniffing: { disable: false, destOverride: ["http", "tls", "quic"], metadataOnly: false } },
+    { port: ARGO_PORT, protocol: 'vless', settings: { clients: [{ id: UUID, flow: 'xtls-rprx-vision' }], decryption: 'none', fallbacks: [{ dest: 23001 }, { path: "/vless2024", dest: 23002 }, { path: "/vmess2024", dest: 23003 }, { path: "/trojan2024", dest: 23004 }] }, streamSettings: { network: 'tcp' } },
+    { port: 23001, listen: "127.0.0.1", protocol: "vless", settings: { clients: [{ id: UUID }], decryption: "none" }, streamSettings: { network: "ws", security: "none" } },
+    { port: 23002, listen: "127.0.0.1", protocol: "vless", settings: { clients: [{ id: UUID, level: 0 }], decryption: "none" }, streamSettings: { network: "ws", security: "none", wsSettings: { path: "/vless2024" } }, sniffing: { disable: false, destOverride: ["http", "tls", "quic"], metadataOnly: false } },
+    { port: 23003, listen: "127.0.0.1", protocol: "vmess", settings: { clients: [{ id: UUID, alterId: 0 }] }, streamSettings: { network: "ws", wsSettings: { path: "/vmess2024" } }, sniffing: { disable: false, destOverride: ["http", "tls", "quic"], metadataOnly: false } },
+    { port: 23004, listen: "127.0.0.1", protocol: "trojan", settings: { clients: [{ password: UUID }] }, streamSettings: { network: "ws", security: "none", wsSettings: { path: "/trojan2024" } }, sniffing: { disable: false, destOverride: ["http", "tls", "quic"], metadataOnly: false } },
   ],
   dns: { servers: ["https+local://8.8.8.8/dns-query"] },
   outbounds: [
